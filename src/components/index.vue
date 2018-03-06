@@ -1,13 +1,13 @@
 <template>
     <div class="index-contail">
-
+        这是主页哦
     </div>
 </template>
 
 <script>
     export default {
 
-        name: 'login',
+        name: 'honePage',
         data() {
             return {
 
@@ -22,9 +22,10 @@
     }
 </script>
 
-<style scoped>
+<style type="text/css" lang="less" scoped>
     .index-contail{
         width:100%;
+        height:500px;
         overflow: hidden;
     }
 </style>
