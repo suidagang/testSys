@@ -5,8 +5,8 @@
             <el-form-item prop="account">
                 <el-input type="text" prefix-icon="el-icon-service" v-model="loginData.account"  placeholder="账号" :clearable="true"></el-input>
             </el-form-item>
-            <el-form-item prop="password">
-                <el-input type="password" prefix-icon="el-icon-edit" v-model="loginData.password" placeholder="密码" :clearable="true"></el-input>
+            <el-form-item prop="password" >
+                <el-input type="password" @keydown.enter.native = "login()" prefix-icon="el-icon-edit" v-model="loginData.password" placeholder="密码" :clearable="true"></el-input>
             </el-form-item>
             <el-form-item>
                 <!--@click.native 组件封装了enter事件 用量触发该事件的-->
@@ -29,7 +29,7 @@
                 }
             };
             const validateAccount = (rule,value,callback) => {
-                if(value != "testDemo"){
+                if(value != "111"){
                     callback(new Error('账号输入有误'));
                 }else{
                     callback()
@@ -67,14 +67,17 @@
             $(".login-contail").height(that.containerHeight);
         },
         methods:{
+            testss(){
+                alert(1)
+            },
             login(){
                 var that = this;
                 that.$refs.loginForm.validate(valid => {
                     //验证通过处理事件
                     if(valid){
-                        alert(111)
+                        that.$router.push("homePage")
                     }else{
-                        alert(222)
+                        that.$message('验证错误');
                     }
                 })
             }
