@@ -1,6 +1,6 @@
 <template>
     <div class="login-contail">
-        <el-form  :model="loginData" :rules="loginRules" ref="loginData" label-width="0px" class="login-model">
+        <el-form  :model="loginData" :rules="loginRules" ref="loginForm" label-width="0px" class="login-model">
             <h3 class="login-title">登录系统</h3>
             <el-form-item prop="account">
                 <el-input type="text" prefix-icon="el-icon-service" v-model="loginData.account"  placeholder="账号" :clearable="true"></el-input>
@@ -9,7 +9,8 @@
                 <el-input type="password" prefix-icon="el-icon-edit" v-model="loginData.password" placeholder="密码" :clearable="true"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" class="login-btn">登录</el-button>
+                <!--@click.native 组件封装了enter事件 用量触发该事件的-->
+                <el-button type="primary" class="login-btn" @click.native.prevent="login()">登录</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -22,19 +23,24 @@
         data() {
             const validateEmail = (rule, value, callback) => {
                 if (!value) {
-                    callback(new Error('请输入正确的合法邮箱'));
+                    callback(new Error('请填写账号'));
                 } else {
                     callback();
                 }
             };
-
+            const validateAccount = (rule,value,callback) => {
+                if(value != "testDemo"){
+                    callback(new Error('账号输入有误'));
+                }else{
+                    callback()
+                }
+            };
             const validatePass = (rule, value, callback) => {
-                callback();
-//                if (value.length < 6) {
-//                    callback(new Error('密码不能小于6位'));
-//                } else {
-//                    callback();
-//                }
+                if (value.length < 6) {
+                    callback(new Error('密码不能小于6位'));
+                } else {
+                    callback();
+                }
             };
 
             return {
@@ -45,6 +51,7 @@
                 loginRules: {
                     account: [
                         { required: true, trigger: 'blur', validator: validateEmail },
+                        { trigger: 'blur', validator: validateAccount},
                     ],
                     password: [
                         { required: true, trigger: 'blur', validator: validatePass },
@@ -58,11 +65,24 @@
             //获取显示器的高度
             that.containerHeight = $(window).height();
             $(".login-contail").height(that.containerHeight);
+        },
+        methods:{
+            login(){
+                var that = this;
+                that.$refs.loginForm.validate(valid => {
+                    //验证通过处理事件
+                    if(valid){
+                        alert(111)
+                    }else{
+                        alert(222)
+                    }
+                })
+            }
         }
     }
 </script>
 
-<style scoped>
+<style type="text/css" lang="less" scoped>
     .login-contail{
         width:100%;
         overflow: hidden;
