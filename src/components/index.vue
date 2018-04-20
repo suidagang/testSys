@@ -1,24 +1,22 @@
 <template>
-    <div class="index-contail">
-        <div class="header-top"></div>
-        <div class="left-bar-menu">
-            <el-menu
-                default-active="2"
-                class="el-menu-vertical-demo"
-                @open="handleOpen"
-                @close="handleClose"
-                background-color="#545c64"
-                text-color="#fff"
-                active-text-color="#ffd04b">
+    <el-container style="position:fixed;top: 0;left: 0;bottom: 0; right: 0;border: 1px solid #eee">
+        <el-aside width="200px" style="background: #324157">
+            <el-menu class="side-bar-box" mode="vertical"
+                    :collapse="isCollapse"
+                    background-color="#304156"
+                    text-color="#bfcbd9"
+                    active-text-color="#409EFF"
+                    @open="handleOpen"
+                    @close="handleClose">
                 <template v-for="items in barMenu" >
-                    <el-submenu  :index="items.index" v-if="items.children.length>0" >
+                    <el-submenu  :index="items.index" v-if="items.children.length>0" class="el-menu-title-box" >
                         <template slot="title">
                             <i :class="items.icons"></i>
                             <span>{{items.name}}</span>
                         </template>
                         <template v-for = "item in items.children" >
                             <el-menu-item :index="item.index" v-if="item.children.length<=0">{{item.name}}</el-menu-item>
-                            <el-submenu :index="item.index" v-if="item.children.length>0">
+                            <el-submenu class="boxs" :index="item.index" v-if="item.children.length>0">
                                 <template slot="title">{{item.name}}</template>
                                 <template v-for="list in item.children">
                                     <el-menu-item :index="list.index" v-if="list.children.length<=0">{{list.name}}</el-menu-item>
@@ -32,8 +30,36 @@
                     </el-menu-item>
                 </template>
             </el-menu>
-        </div>
-    </div>
+        </el-aside>
+        <el-container>
+            <el-header style="text-align: right; font-size: 12px">
+                <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+                    <el-radio-button :label="false">展开</el-radio-button>
+                    <el-radio-button :label="true">收起</el-radio-button>
+                </el-radio-group>
+                <el-dropdown>
+                    <i class="el-icon-setting" style="margin-right: 15px"></i>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item>查看</el-dropdown-item>
+                        <el-dropdown-item>新增</el-dropdown-item>
+                        <el-dropdown-item>删除</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+                <span>王小虎</span>
+            </el-header>
+
+            <el-main>
+                <el-table :data="tableData">
+                    <el-table-column prop="date" label="日期" width="140">
+                    </el-table-column>
+                    <el-table-column prop="name" label="姓名" width="120">
+                    </el-table-column>
+                    <el-table-column prop="address" label="地址">
+                    </el-table-column>
+                </el-table>
+            </el-main>
+        </el-container>
+    </el-container>
 </template>
 
 <script>
@@ -41,7 +67,14 @@
 
         name: 'honePage',
         data() {
+            const item = {
+                date: '2016-05-02',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1518 弄'
+            };
             return {
+                isCollapse: false,
+                tableData: Array(20).fill(item),
                 barMenu:[
                     {
                         "name": "导航一","icons":"el-icon-location","index":"1", "icon": "computer",children: [
@@ -85,28 +118,18 @@
         },
         methods:{
             handleOpen(key, keyPath) {
-                console.log(key, keyPath,11);
+                console.log(key, keyPath);
             },
             handleClose(key, keyPath) {
-                console.log(key, keyPath,22);
+                console.log(key, keyPath);
             }
         }
     }
 </script>
 
 <style type="text/css" lang="less" scoped>
-    .index-contail{
-        width:100%;
-        overflow: hidden;
-    }
-    .header-top{
-        height: 52px;
-        width:100%;
-        background: #2BA5E3;
-        overflow: hidden;
-    }
-    .left-bar-menu{
-        width:240px;
-        overflow: hidden;
+    .el-menu-vertical-demo:not(.el-menu--collapse) {
+        width: 200px;
+        min-height: 400px;
     }
 </style>

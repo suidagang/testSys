@@ -6,7 +6,13 @@ import router from './router'
 //引入elementui  UI库及样式
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import "./index.less";
 Vue.use(ElementUI);
+
+import VueLoading from './components/plugin/loading'
+Vue.use(VueLoading, {
+    container: '.app',
+})
 
 /**
  * 2.2.0 新增
