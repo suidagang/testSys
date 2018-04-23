@@ -1,13 +1,11 @@
 <template>
-    <el-container style="position:fixed;top: 0;left: 0;bottom: 0; right: 0;border: 1px solid #eee">
-        <el-aside width="200px" style="background: #324157">
+    <div class="app-wrapper" :class="{hideSidebar:isCollapse}">
+        <div class="sidebar-container">
             <el-menu class="side-bar-box" mode="vertical"
                     :collapse="isCollapse"
                     background-color="#304156"
                     text-color="#bfcbd9"
-                    active-text-color="#409EFF"
-                    @open="handleOpen"
-                    @close="handleClose">
+                    active-text-color="#409EFF">
                 <template v-for="items in barMenu" >
                     <el-submenu  :index="items.index" v-if="items.children.length>0" class="el-menu-title-box" >
                         <template slot="title">
@@ -24,14 +22,14 @@
                             </el-submenu>
                         </template>
                     </el-submenu>
-                    <el-menu-item :index="items.index" v-if="items.children.length<=0">
+                    <el-menu-item :index="items.index" class="submenu-title-noDropdown" v-if="items.children.length<=0">
                         <i :class="items.icons"></i>
                         <span slot="title">{{items.name}}</span>
                     </el-menu-item>
                 </template>
             </el-menu>
-        </el-aside>
-        <el-container>
+        </div>
+        <div class="main-container">
             <el-header style="text-align: right; font-size: 12px">
                 <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
                     <el-radio-button :label="false">展开</el-radio-button>
@@ -58,8 +56,8 @@
                     </el-table-column>
                 </el-table>
             </el-main>
-        </el-container>
-    </el-container>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -102,7 +100,22 @@
                         }]
                     },
                     {
-                        "name": "导航二","icons":"el-icon-menu","index":"2", "icon": "computer",children:[]
+                        "name": "导航二","icons":"el-icon-menu","index":"2", "icon": "computer",children:[
+                        {
+                            "name": "选项1","index":"2-1", "icon": "timer",children:[]
+                        },
+                        {
+                            "name": "选项2","index":"2-2", "icon": "timer",children:[]
+                        },
+                        {
+                            "name": "选项3", "index":"2-3","icon": "timer", children: []
+                        },
+                        {
+                            "name": "选项4","index":"2-4", "icon": "timer",children:[]
+                        },
+                        {
+                            "name": "选项5","index":"2-5", "icon": "timer",children:[]
+                        }]
                     },
                     {
                         "name": "导航三","icons":"el-icon-document","index":"3", "icon": "computer",children:[]
@@ -117,17 +130,17 @@
 
         },
         methods:{
-            handleOpen(key, keyPath) {
-                console.log(key, keyPath);
-            },
-            handleClose(key, keyPath) {
-                console.log(key, keyPath);
-            }
         }
     }
 </script>
 
 <style type="text/css" lang="less" scoped>
+    .app-wrapper {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
     .el-menu-vertical-demo:not(.el-menu--collapse) {
         width: 200px;
         min-height: 400px;
