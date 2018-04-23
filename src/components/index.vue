@@ -31,6 +31,12 @@
         </div>
         <div class="main-container">
             <el-header style="text-align: right; font-size: 12px">
+                <!--<svg class="icon tst-iocns" aria-hidden="true">-->
+                    <!--<use xlink:href="#icon-power_v_web"></use>-->
+                <!--</svg>-->
+                <svg class="tst-iocns" aria-hidden="true">
+                    <use xlink:href="#icon-icon_navbar_fold"></use>
+                </svg>
                 <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
                     <el-radio-button :label="false">展开</el-radio-button>
                     <el-radio-button :label="true">收起</el-radio-button>
@@ -144,5 +150,10 @@
     .el-menu-vertical-demo:not(.el-menu--collapse) {
         width: 200px;
         min-height: 400px;
+    }
+    .tst-iocns{
+        width:40px;
+        height:40px;
+        font-size: 40px;
     }
 </style>

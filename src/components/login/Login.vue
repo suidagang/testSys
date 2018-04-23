@@ -17,6 +17,7 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
     export default {
 
         name: 'login',
@@ -65,6 +66,15 @@
             //获取显示器的高度
             that.containerHeight = $(window).height();
             $(".login-contail").height(that.containerHeight);
+            console.log(that.sidebar,that.language,that.twoName,that.threeName)
+        },
+        computed: {
+            ...mapGetters([
+                'sidebar',
+                'language',
+                'twoName',
+                'threeName'
+            ])
         },
         methods:{
             testss(){
