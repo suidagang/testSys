@@ -8,6 +8,8 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 //引入siderbar 的覆盖样式
 import "./less/siderBar.less"
+//引入覆盖table的样式
+import "./less/table.less";
 //引入阿里巴巴iconfont
 import './iconfont/iconfont.css'
 import './iconfont/iconfont'

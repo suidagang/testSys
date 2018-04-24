@@ -1,5 +1,5 @@
 <template>
-    <div class="app-wrapper" :class="{hideSidebar:isCollapse}">
+    <div class="app-wrapper" :class="{hideSidebar:!sidebar.opened}">
         <sidebar class="sidebar-container"></sidebar>
         <div class="main-container">
             <navbar></navbar>
@@ -19,6 +19,12 @@
         },
         mounted(){
 
+        },
+        computed: {
+            sidebar() {
+                var that = this;
+                return this.$store.state.one.sidebar
+            }
         },
         components: {
             Navbar,

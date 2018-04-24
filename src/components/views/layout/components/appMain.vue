@@ -36,5 +36,5 @@
 </script>
 
 <style type="text/css" lang="less" scoped>
-
+@import "./../../../../less/table.less";
 </style>
