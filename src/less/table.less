@@ -1,10 +1,33 @@
 /*table*/
 .el-table th>.cell,.el-table .cell{
-  text-align: center!important;
+    text-align: center!important;
 }
 /*面包屑*/
 .el-breadcrumb__inner{
-  font-weight: 400!important;
-  color: #606266!important;
-  cursor: text!important;
+    font-weight: 400!important;
+    color: #606266!important;
+    cursor: text!important;
+}
+/*模拟浏览器多窗口table*/
+.tags-view-wrapper {
+    .tags-view-item {
+        .el-icon-close {
+            width: 16px;
+            height: 16px;
+            vertical-align: 2px;
+            border-radius: 50%;
+            text-align: center;
+            transition: all .3s cubic-bezier(.645, .045, .355, 1);
+            transform-origin: 100% 50%;
+            &:before {
+                transform: scale(.6);
+                display: inline-block;
+                vertical-align: -3px;
+            }
+            &:hover {
+                background-color: #b4bccc;
+                color: #fff;
+            }
+        }
+    }
 }

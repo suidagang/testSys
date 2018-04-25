@@ -11,9 +11,8 @@
             <el-dropdown class="drop-down-box">
                 <i class="el-icon-setting" style="margin-right: 15px;font-size: 20px;margin-top: 20px"></i>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>查看</el-dropdown-item>
-                    <el-dropdown-item>新增</el-dropdown-item>
-                    <el-dropdown-item>删除</el-dropdown-item>
+                    <el-dropdown-item>修改密码</el-dropdown-item>
+                    <el-dropdown-item>退出</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
             <el-tooltip effect="dark" content="主题颜色" placement="bottom">

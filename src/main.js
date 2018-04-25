@@ -21,7 +21,7 @@ import VueLoading from './components/plugin/loading'
 Vue.use(VueLoading, {
     container: '.app',
 })
-
+console.log(process.env.API_ROOT)
 /**
  * 2.2.0 新增
  * 设置为 false 以阻止 vue 在启动时生成生产提示。

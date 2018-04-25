@@ -1,11 +1,12 @@
 <template>
     <div class="tags-view-container">
         <scroll-pane class='tags-view-wrapper' ref='scrollPane'>
-            <router-link ref='tag' class="tags-view-item active" to="/homePage" key="sui1">
+            <!--鼠标右键功能 @contextmenu.prevent.native-->
+            <router-link ref='tag' class="tags-view-item" to="/homePage" key="sui1" @contextmenu.prevent.native="openMenu('',$event)">
                 测试1
                 <span class='el-icon-close'></span>
             </router-link>
-            <router-link ref='tag' class="tags-view-item active" to="/homePage" key="sui2">
+            <router-link ref='tag' class="tags-view-item active" to="/homePage" key="sui2" @contextmenu.prevent.native="openMenu('',$event)">
                 测试2
                 <span class='el-icon-close'></span>
             </router-link>
@@ -42,7 +43,12 @@ export default {
 
     },
     methods: {
-
+        //鼠标右键功能
+        openMenu(a, e) {
+            this.visible = true;
+            this.left = e.clientX
+            this.top = e.clientY
+        },
     }
 }
 </script>
@@ -57,8 +63,8 @@ export default {
         .tags-view-item {
             display: inline-block;
             position: relative;
-            height: 26px;
-            line-height: 26px;
+            height: 24px;
+            line-height: 24px;
             border: 1px solid #d8dce5;
             color: #495060;
             background: #fff;
@@ -109,6 +115,4 @@ export default {
         }
     }
 }
-</style>
-
 </style>
