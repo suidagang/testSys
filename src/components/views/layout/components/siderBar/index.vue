@@ -13,16 +13,21 @@
 
 <script>
     import SidebarItem from './siderBarItem'
-
+    import { mapGetters } from 'vuex'
     export default {
         data() {
             return {
-                isCollapse:false
+
             }
         },
         components: { SidebarItem },
         computed: {
-
+            ...mapGetters([
+                'sidebar'
+            ]),
+            isCollapse() {
+                return !this.sidebar.opened
+            }
         }
     }
 </script>

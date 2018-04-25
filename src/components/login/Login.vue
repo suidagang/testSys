@@ -46,8 +46,8 @@
 
             return {
                 loginData: {
-                    account: '',
-                    password: ''
+                    account: '111',
+                    password: '123456'
                 },
                 loginRules: {
                     account: [
