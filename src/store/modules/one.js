@@ -1,7 +1,7 @@
 const one = {
     state: {
         sidebar: {
-            opened: false
+            opened: true
         },
         language: 'zh'
     },

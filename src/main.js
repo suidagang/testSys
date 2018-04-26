@@ -10,6 +10,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import "./less/siderBar.less"
 //引入覆盖table的样式
 import "./less/table.less";
+//覆盖浏览器样式
+import "./less/framework.less";
 //引入阿里巴巴iconfont
 import './iconfont/iconfont.css'
 import './iconfont/iconfont'

@@ -2,22 +2,22 @@
     <div>
         <template v-for="items in barMenu" >
             <el-submenu  :index="items.index" v-if="items.children.length>0" class="el-menu-title-box" >
-                <template slot="title">
-                    <i :class="items.icons"></i>
+                <template slot="title" @click="goRouter(items)">
+                    <i class="iconfont side-icons" :class="items.icons"></i>
                     <span>{{items.name}}</span>
                 </template>
                 <template v-for = "item in items.children" >
-                    <el-menu-item :index="item.index" v-if="item.children.length<=0">{{item.name}}</el-menu-item>
+                    <el-menu-item :index="item.index" v-if="item.children.length<=0" @click="goRouter(item)">{{item.name}}</el-menu-item>
                     <el-submenu class="boxs" :index="item.index" v-if="item.children.length>0">
                         <template slot="title">{{item.name}}</template>
                         <template v-for="list in item.children">
-                            <el-menu-item :index="list.index" v-if="list.children.length<=0">{{list.name}}</el-menu-item>
+                            <el-menu-item :index="list.index" v-if="list.children.length<=0" @click="goRouter(item)">{{list.name}}</el-menu-item>
                         </template>
                     </el-submenu>
                 </template>
             </el-submenu>
-            <el-menu-item :index="items.index" class="submenu-title-noDropdown" v-if="items.children.length<=0">
-                <i :class="items.icons"></i>
+            <el-menu-item :index="items.index" class="submenu-title-noDropdown" v-if="items.children.length<=0" @click="goRouter(items)">
+                <i class="iconfont side-icons" :class="items.icons"></i>
                 <span slot="title">{{items.name}}</span>
             </el-menu-item>
         </template>
@@ -33,53 +33,28 @@
                 isCollapse: false,
                 barMenu:[
                     {
-                        "name": "导航一","icons":"el-icon-location","index":"1", "icon": "computer",children: [
+                        "name": "首页","icons":"icon-icon_home","index":"homePage",path:"/homePage",children: []
+                    },
+                    {
+                        "name": "组件","icons":"icon-list","index":"components",path:"/homePage",children:[
                         {
-                            "name": "选项1","index":"1-1", "icon": "timer",children:[]
+                            "name": "按钮","index":"buttons",path:"/button",children:[]
                         },
                         {
-                            "name": "选项2","index":"1-2", "icon": "timer",children:[]
+                            "name": "表格","index":"table",path:"/table",children:[]
                         },
                         {
-                            "name": "选项3", "index":"1-3","icon": "timer", children: [
-                            {
-                                "name": "选项3-1", "index":"3-1","icon": "timer",children:[]
-                            },
-                            {
-                                "name": "选项3-2","index":"3-2", "icon": "timer",children:[]
-                            }
-                        ]
+                            "name": "单选框", "index":"radio",path:"/radio", children: []
                         },
                         {
-                            "name": "选项4","index":"1-4", "icon": "timer",children:[]
-                        },
-                        {
-                            "name": "选项5","index":"1-5", "icon": "timer",children:[]
+                            "name": "多选框","index":"checkbox",path:"/checkbox",children:[]
                         }]
                     },
                     {
-                        "name": "导航二","icons":"el-icon-menu","index":"2", "icon": "computer",children:[
-                        {
-                            "name": "选项1","index":"2-1", "icon": "timer",children:[]
-                        },
-                        {
-                            "name": "选项2","index":"2-2", "icon": "timer",children:[]
-                        },
-                        {
-                            "name": "选项3", "index":"2-3","icon": "timer", children: []
-                        },
-                        {
-                            "name": "选项4","index":"2-4", "icon": "timer",children:[]
-                        },
-                        {
-                            "name": "选项5","index":"2-5", "icon": "timer",children:[]
-                        }]
+                        "name": "开关","icons":"icon-tool","index":"switch",path:"/switch",children:[]
                     },
                     {
-                        "name": "导航三","icons":"el-icon-document","index":"3", "icon": "computer",children:[]
-                    },
-                    {
-                        "name": "导航四","icons":"el-icon-setting","index":"4", "icon": "computer",children:[]
+                        "name": "图标","icons":"icon-search","index":"icon",path:"/icon",children:[]
                     },
                 ]
             }
@@ -88,6 +63,10 @@
 
         },
         methods:{
+            goRouter (obj) {
+                let that = this;
+                that.$router.push(obj.path)
+            }
         }
     }
 </script>
@@ -96,5 +75,14 @@
     .el-menu-vertical-demo:not(.el-menu--collapse) {
         width: 200px;
         min-height: 400px;
+    }
+    .side-icons{
+        display: inline-block;
+        margin-right: 5px;
+        width: 24px;
+        text-align: center;
+        font-size: 18px;
+        vertical-align: middle;
+        color: #fff;
     }
 </style>
