@@ -85,7 +85,9 @@
                 that.$refs.loginForm.validate(valid => {
                     //验证通过处理事件
                     if(valid){
-                        that.$router.push("homePage")
+                        localStorage.setItem('token', '2dksjak3');
+                        that.$router.push("homePage");
+
                     }else{
                         that.$message('验证错误');
                     }

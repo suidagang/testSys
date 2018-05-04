@@ -13,59 +13,144 @@ const radio = r => require.ensure([], () => r(require('@/components/pages/useCom
 const checkbox = r => require.ensure([], () => r(require('@/components/pages/useComponents/checkbox')), 'Checkbox')
 Vue.use(Router)
 
+/**
+*不变的路由
+*/
+export const constantRouterMap = [
+    {
+        path: '/login',
+        component: Login,
+        name: '登录页',
+    },
+    {
+        path: '',
+        name: '侧栏和顶栏',
+        component: layout,
+        redirect: '/homePage',
+        children: [
+            {
+                path: '/homePage',
+                name: '首页',
+                component: Homepage,
+            },
+        ]
+
+    },
+]
+/**
+*动态路由
+*/
+export const asyncRouterMap = [
+    {
+        path: '/components',
+        component: layout,
+        redirect: '/components/button',
+        children: [
+            {
+                path: 'button',
+                component: button,
+                //name: '按钮',
+            },
+            {
+                path: 'table',
+                component: table,
+                //name: '表格',
+            },
+            {
+                path: 'radio',
+                component: radio,
+                //name: '单选框',
+            },
+            {
+                path: 'checkbox',
+                component: checkbox,
+                //name: '复选框',
+            }
+        ]
+    },
+    {
+        path: '/switch',
+        component: layout,
+        redirect: '/switch/index',
+        children: [
+            {
+                path: 'index',
+                component: switchpage,
+                //name: '开关',
+            }
+        ]
+    },
+    {
+        path: '/icon',
+        component: layout,
+        redirect: '/icon/index',
+        children: [
+            {
+                path: 'index',
+                component: icon,
+                //name: '图标',
+            }
+        ]
+    },
+    { path: '*', redirect: '/login' }
+]
 export default new Router({
-    routes: [
-        {
-            path: '/login',
-            name: '登录页',
-            component: Login
-        },
-        {
-            path: '/',
-            name: '侧栏和顶栏',
-            component: layout,
-            redirect: '/HomePage',
-            children: [
-                {
-                    path: '/homePage',
-                    name: '首页',
-                    component: Homepage,
-                },
-                {
-                    path: '/icon',
-                    name: '图标',
-                    component: icon,
-                },
-                {
-                    path: '/switch',
-                    name: '开关',
-                    component: switchpage,
-                },
-                {
-                    path: '/button',
-                    name: '按钮',
-                    component: button,
-                },
-                {
-                    path: '/table',
-                    name: '表格',
-                    component: table,
-                },
-                {
-                    path: '/radio',
-                    name: '单选框',
-                    component: radio,
-                },
-                {
-                    path: '/checkbox',
-                    name: '复选框',
-                    component: checkbox,
-                }
-            ]
-
-        },
-
-        //重定向,地址错误统一跳转到login
-        { path: '*', redirect: '/login' }
-    ]
+    scrollBehavior: () => ({ y: 0 }),
+    routes: constantRouterMap
 })
+//export default new Router({
+//    routes: [
+//        {
+//            path: '/login',
+//            name: '登录页',
+//            component: Login
+//        },
+//        {
+//            path: '/',
+//            name: '侧栏和顶栏',
+//            component: layout,
+//            redirect: '/HomePage',
+//            children: [
+//                {
+//                    path: '/homePage',
+//                    name: '首页',
+//                    component: Homepage,
+//                },
+//                {
+//                    path: '/icon',
+//                    name: '图标',
+//                    component: icon,
+//                },
+//                {
+//                    path: '/switch',
+//                    name: '开关',
+//                    component: switchpage,
+//                },
+//                {
+//                    path: '/button',
+//                    name: '按钮',
+//                    component: button,
+//                },
+//                {
+//                    path: '/table',
+//                    name: '表格',
+//                    component: table,
+//                },
+//                {
+//                    path: '/radio',
+//                    name: '单选框',
+//                    component: radio,
+//                },
+//                {
+//                    path: '/checkbox',
+//                    name: '复选框',
+//                    component: checkbox,
+//                }
+//            ]
+//
+//        },
+//
+//        //重定向,地址错误统一跳转到login
+//        { path: '*', redirect: '/login' }
+//    ]
+//})

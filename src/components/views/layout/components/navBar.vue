@@ -12,9 +12,10 @@
                 <i class="el-icon-setting" style="margin-right: 15px;font-size: 20px;margin-top: 20px"></i>
                 <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item>修改密码</el-dropdown-item>
-                    <el-dropdown-item>退出</el-dropdown-item>
+                    <el-dropdown-item >退出</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
+            <button @click="goOut()">退出</button>
             <el-tooltip effect="dark" content="主题颜色" placement="bottom">
                 <theme-picker class="theme-switch right-menu-item"></theme-picker>
             </el-tooltip>
@@ -57,6 +58,12 @@
                     return false
                 }
                 screenfull.toggle()
+            },
+            goOut(){
+                let that = this;
+                console.log("退出");
+                localStorage.removeItem("token");
+                that.$router.push("login")
             }
         }
     }

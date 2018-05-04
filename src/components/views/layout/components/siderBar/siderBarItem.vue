@@ -38,23 +38,23 @@
                     {
                         "name": "组件","icons":"icon-list","index":"components",path:"/homePage",children:[
                         {
-                            "name": "按钮","index":"buttons",path:"/button",children:[]
+                            "name": "按钮","index":"buttons",path:"/components/button",children:[]
                         },
                         {
-                            "name": "表格","index":"table",path:"/table",children:[]
+                            "name": "表格","index":"table",path:"/components/table",children:[]
                         },
                         {
-                            "name": "单选框", "index":"radio",path:"/radio", children: []
+                            "name": "单选框", "index":"radio",path:"/components/radio", children: []
                         },
                         {
-                            "name": "多选框","index":"checkbox",path:"/checkbox",children:[]
+                            "name": "多选框","index":"checkbox",path:"/components/checkbox",children:[]
                         }]
                     },
                     {
-                        "name": "开关","icons":"icon-tool","index":"switch",path:"/switch",children:[]
+                        "name": "开关","icons":"icon-tool","index":"switch",path:"/switch/index",children:[]
                     },
                     {
-                        "name": "图标","icons":"icon-search","index":"icon",path:"/icon",children:[]
+                        "name": "图标","icons":"icon-search","index":"icon",path:"/icon/index",children:[]
                     },
                 ]
             }
