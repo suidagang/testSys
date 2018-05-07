@@ -1,14 +1,10 @@
 <template>
     <div class="tags-view-container">
         <scroll-pane class='tags-view-wrapper' ref='scrollPane'>
-            <!--鼠标右键功能 @contextmenu.prevent.native-->
-            <router-link ref='tag' class="tags-view-item" to="/homePage" key="sui1" @contextmenu.prevent.native="openMenu('',$event)">
-                测试1
-                <span class='el-icon-close'></span>
-            </router-link>
-            <router-link ref='tag' class="tags-view-item active" to="/homePage" key="sui2" @contextmenu.prevent.native="openMenu('',$event)">
-                测试2
-                <span class='el-icon-close'></span>
+            <router-link ref='tag' class="tags-view-item" :class="isActive(tag)?'active':''" v-for="tag in Array.from(visitedViews)"
+                         :to="tag.path" :key="tag.path" @contextmenu.prevent.native="openMenu(tag,$event)">
+                {{tag.title}}
+                <span class='el-icon-close' @click.prevent.stop='closeSelectedTag(tag)'></span>
             </router-link>
         </scroll-pane>
 
@@ -34,15 +30,79 @@ export default {
         }
     },
     computed: {
-
+        visitedViews() {
+            return this.$store.state.tagsView.visitedViews
+        }
     },
     watch: {
-
+        $route() {
+            this.addViewTags()
+            this.moveToCurrentTag()
+        },
+        visible(value) {
+            if (value) {
+                document.body.addEventListener('click', this.closeMenu)
+            } else {
+                document.body.removeEventListener('click', this.closeMenu)
+            }
+        }
     },
     mounted() {
-
+        this.addViewTags()
     },
     methods: {
+        generateRoute() {
+            if (this.$route.name) {
+                return this.$route
+            }
+            return false
+        },
+        isActive(route) {
+            return route.path === this.$route.path || route.name === this.$route.name
+        },
+        addViewTags() {
+            const route = this.generateRoute()
+            if (!route) {
+                return false
+            };
+            this.$store.dispatch('addVisitedViews', route)
+        },
+        moveToCurrentTag() {
+            const tags = this.$refs.tag
+            this.$nextTick(() => {
+                for (const tag of tags) {
+                    if (tag.to === this.$route.path) {
+                        this.$refs.scrollPane.moveToTarget(tag.$el)
+                        break
+                    }
+                }
+            })
+        },
+        closeSelectedTag(view) {
+            this.$store.dispatch('delVisitedViews', view).then((views) => {
+                if (this.isActive(view)) {
+                    const latestView = views.slice(-1)[0]
+                    if (latestView) {
+                        this.$router.push(latestView.path)
+                    } else {
+                        this.$router.push('/')
+                    }
+                }
+            })
+        },
+        closeOthersTags() {
+            this.$router.push(this.selectedTag.path)
+            this.$store.dispatch('delOthersViews', this.selectedTag).then(() => {
+                this.moveToCurrentTag()
+            })
+        },
+        closeAllTags() {
+            this.$store.dispatch('delAllViews')
+            this.$router.push('/')
+        },
+        closeMenu() {
+            this.visible = false
+        },
         //鼠标右键功能
         openMenu(a, e) {
             this.visible = true;

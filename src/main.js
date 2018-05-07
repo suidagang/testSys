@@ -36,34 +36,24 @@ let registerRouteFresh = true
 router.beforeEach((to, from, next) => {
   NProgress.start() // 开始进度条
   var token = localStorage.getItem("token");
-  console.log("jin");
   if(token){
-    console.log('token');
     if(to.path === '/login') {
-      console.log(to.path,"login")
       next({ path: '/' })
       NProgress.done() // 结束进度条
     }else {
       if (registerRouteFresh) {
-        console.log(to.path,"flag");
         store.dispatch('GenerateRoutes').then(() => { // 根据roles权限生成可访问的路由表
-          console.log("dongtailuyou");
-          console.log(store.getters.addRouters);
           router.addRoutes(store.getters.addRouters) // 动态添加可访问路由表
           registerRouteFresh = false
           next({ ...to, replace: true }) // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
-
           NProgress.done() // 结束进度条
         })
       }else{
-        console.log(to.path,"no-flag");
-        console.log(router);
         next();
         NProgress.done() // 结束进度条
       }
     }
   }else{
-    console.log('notoken');
     if(to.path=='/login'){//如果是登录页面路径，就直接next()
       next();
       NProgress.done()

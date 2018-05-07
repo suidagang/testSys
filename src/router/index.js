@@ -21,10 +21,10 @@ export const constantRouterMap = [
         path: '/login',
         component: Login,
         name: '登录页',
+        meta: { title: '登录页'}
     },
     {
         path: '',
-        name: '侧栏和顶栏',
         component: layout,
         redirect: '/homePage',
         children: [
@@ -32,6 +32,7 @@ export const constantRouterMap = [
                 path: '/homePage',
                 name: '首页',
                 component: Homepage,
+                meta: { title: '首页'}
             },
         ]
 
@@ -44,27 +45,35 @@ export const asyncRouterMap = [
     {
         path: '/components',
         component: layout,
-        redirect: '/components/button',
+        name:"组件",
+        redirect: 'noredirect',
+        meta: {
+            title: '组件',
+        },
         children: [
             {
                 path: 'button',
                 component: button,
-                //name: '按钮',
+                name: '按钮',
+                meta: { title: '按钮'}
             },
             {
                 path: 'table',
                 component: table,
-                //name: '表格',
+                name: '表格',
+                meta: { title: '表格'}
             },
             {
                 path: 'radio',
                 component: radio,
-                //name: '单选框',
+                name: '单选框',
+                meta: { title: '单选框'}
             },
             {
                 path: 'checkbox',
                 component: checkbox,
-                //name: '复选框',
+                name: '复选框',
+                meta: { title: '复选框'}
             }
         ]
     },
@@ -76,7 +85,8 @@ export const asyncRouterMap = [
             {
                 path: 'index',
                 component: switchpage,
-                //name: '开关',
+                name: '开关',
+                meta: { title: '开关'}
             }
         ]
     },
@@ -88,7 +98,8 @@ export const asyncRouterMap = [
             {
                 path: 'index',
                 component: icon,
-                //name: '图标',
+                name: '图标',
+                meta: { title: '图标'}
             }
         ]
     },
