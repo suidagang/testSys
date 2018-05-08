@@ -1,3 +1,10 @@
+/**
+ * entries() es7语法
+ * for–in 用于遍历对象的属性。
+ * for-of 用于遍历数据 — 就像数组中的元素。
+ *
+ * */
+
 const tagsView = {
   state: {
     visitedViews: [],
@@ -16,15 +23,16 @@ const tagsView = {
       }
     },
     DEL_VISITED_VIEWS: (state, view) => {
+      console.log(state.visitedViews);
       for (const [i, v] of state.visitedViews.entries()) {
         if (v.path === view.path) {
           state.visitedViews.splice(i, 1)
           break
         }
-      }
+      };
       for (const i of state.cachedViews) {
         if (i === view.name) {
-          const index = state.cachedViews.indexOf(i)
+          const index = state.cachedViews.indexOf(i);
           state.cachedViews.splice(index, 1)
           break
         }

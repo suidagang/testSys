@@ -1,6 +1,7 @@
 <template>
     <div class="tags-view-container">
         <scroll-pane class='tags-view-wrapper' ref='scrollPane'>
+            <!--@contextmenu  右键菜单-->
             <router-link ref='tag' class="tags-view-item" :class="isActive(tag)?'active':''" v-for="tag in Array.from(visitedViews)"
                          :to="tag.path" :key="tag.path" @contextmenu.prevent.native="openMenu(tag,$event)">
                 {{tag.title}}
@@ -9,9 +10,9 @@
         </scroll-pane>
 
         <ul class='contextmenu' v-show="visible" :style="{left:left+'px',top:top+'px'}">
-            <li>关闭</li>
-            <li>关闭其他</li>
-            <li>关闭所有</li>
+            <li @click.prevent.stop='closeSelectedTag(selectedTag)'>关闭</li>
+            <li @click.prevent.stop="closeOthersTags">关闭其他</li>
+            <li @click.prevent.stop="closeAllTags">关闭所有</li>
         </ul>
     </div>
 </template>
@@ -39,13 +40,13 @@ export default {
             this.addViewTags()
             this.moveToCurrentTag()
         },
-        visible(value) {
-            if (value) {
-                document.body.addEventListener('click', this.closeMenu)
-            } else {
-                document.body.removeEventListener('click', this.closeMenu)
-            }
-        }
+//        visible(value) {
+//            if (value) {
+//                document.body.addEventListener('click', this.closeMenu)
+//            } else {
+//                document.body.removeEventListener('click', this.closeMenu)
+//            }
+//        }
     },
     mounted() {
         this.addViewTags()
@@ -81,24 +82,30 @@ export default {
         closeSelectedTag(view) {
             this.$store.dispatch('delVisitedViews', view).then((views) => {
                 if (this.isActive(view)) {
+                    //slice(start),第一个参数是-1表示最后一个元素
                     const latestView = views.slice(-1)[0]
                     if (latestView) {
                         this.$router.push(latestView.path)
                     } else {
                         this.$router.push('/')
-                    }
+                    };
+                    this.closeMenu();
                 }
             })
         },
         closeOthersTags() {
+            console.log("关闭其他");
+            console.log(this.selectedTag.path)
             this.$router.push(this.selectedTag.path)
             this.$store.dispatch('delOthersViews', this.selectedTag).then(() => {
-                this.moveToCurrentTag()
+                this.moveToCurrentTag();
+                this.closeMenu();
             })
         },
         closeAllTags() {
             this.$store.dispatch('delAllViews')
-            this.$router.push('/')
+            this.$router.push('/');
+            this.closeMenu();
         },
         closeMenu() {
             this.visible = false
@@ -106,6 +113,7 @@ export default {
         //鼠标右键功能
         openMenu(a, e) {
             this.visible = true;
+            this.selectedTag = a
             this.left = e.clientX
             this.top = e.clientY
         },
