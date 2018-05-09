@@ -1,30 +1,52 @@
 <template>
     <div>
-        <template v-for="items in barMenu" >
-            <el-submenu  :index="items.index" v-if="items.children.length>0" class="el-menu-title-box" >
+        <!--<template v-for="items in barMenu" >-->
+            <!--<el-submenu  :index="items.index" v-if="items.children.length>0" class="el-menu-title-box" >-->
+                <!--<template slot="title" @click="goRouter(items)">-->
+                    <!--<i class="iconfont side-icons" :class="items.icons"></i>-->
+                    <!--<span>{{items.name}}</span>-->
+                <!--</template>-->
+                <!--<template v-for = "item in items.children" >-->
+                    <!--<el-menu-item :index="item.index" v-if="item.children.length<=0" @click="goRouter(item)">{{item.name}}</el-menu-item>-->
+                    <!--<el-submenu class="boxs" :index="item.index" v-if="item.children.length>0">-->
+                        <!--<template slot="title">{{item.name}}</template>-->
+                        <!--<template v-for="list in item.children">-->
+                            <!--<el-menu-item :index="list.index" v-if="list.children.length<=0" @click="goRouter(item)">{{list.name}}</el-menu-item>-->
+                        <!--</template>-->
+                    <!--</el-submenu>-->
+                <!--</template>-->
+            <!--</el-submenu>-->
+            <!--<el-menu-item :index="items.index" class="submenu-title-noDropdown" v-if="items.children.length<=0" @click="goRouter(items)">-->
+                <!--<i class="iconfont side-icons" :class="items.icons"></i>-->
+                <!--<span slot="title">{{items.name}}</span>-->
+            <!--</el-menu-item>-->
+        <!--</template>-->
+        <template v-for="items in fourRouters" v-if="!items.hidden&&items.children">
+            <el-submenu  :index="items.path" :key="items.path" v-if="items.children && items.redirect === 'noredirect'" class="el-menu-title-box" >
                 <template slot="title" @click="goRouter(items)">
-                    <i class="iconfont side-icons" :class="items.icons"></i>
-                    <span>{{items.name}}</span>
+                    <i class="iconfont side-icons" :class="items.meta.icons"></i>
+                    <span>{{items.meta.title}}</span>
                 </template>
-                <template v-for = "item in items.children" >
-                    <el-menu-item :index="item.index" v-if="item.children.length<=0" @click="goRouter(item)">{{item.name}}</el-menu-item>
-                    <el-submenu class="boxs" :index="item.index" v-if="item.children.length>0">
-                        <template slot="title">{{item.name}}</template>
+                <template v-for = "item in items.children">
+                    <el-menu-item :index="items.path+'/'+item.path" :key="item.path" v-if="!item.children" @click="goRouter(item,items)">{{item.meta.title}}</el-menu-item>
+                    <el-submenu class="boxs" :index="item.path" v-if="item.children">
+                        <template slot="title">{{item.meta.title}}</template>
                         <template v-for="list in item.children">
-                            <el-menu-item :index="list.index" v-if="list.children.length<=0" @click="goRouter(item)">{{list.name}}</el-menu-item>
+                            <el-menu-item :index="list.path" :key="list.path" v-if="list.children.length<=0" @click="goRouter(item)">{{list.meta.title}}</el-menu-item>
                         </template>
                     </el-submenu>
                 </template>
             </el-submenu>
-            <el-menu-item :index="items.index" class="submenu-title-noDropdown" v-if="items.children.length<=0" @click="goRouter(items)">
-                <i class="iconfont side-icons" :class="items.icons"></i>
-                <span slot="title">{{items.name}}</span>
+            <el-menu-item :index="items.path+'/'+items.children[0].path" :key="items.path" class="submenu-title-noDropdown" v-if="items.redirect !== 'noredirect'"  @click="goRouter(items)">
+                <i class="iconfont side-icons" :class="items.meta.icons"></i>
+                <span slot="title">{{items.meta.title}}</span>
             </el-menu-item>
         </template>
     </div>
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
     export default {
 
         name: 'honePage',
@@ -59,13 +81,28 @@
                 ]
             }
         },
-        mounted(){
+
+        computed: {
+            ...mapGetters([
+                'fourRouters',
+            ]),
 
         },
         methods:{
-            goRouter (obj) {
+            goRouter (obj,objs) {
                 let that = this;
-                that.$router.push(obj.path)
+                let goPath = '';
+                if(objs){
+                    goPath = objs.path + "/" + obj.path;
+                }else{
+                    if(obj.path){
+                        goPath = obj.path;
+                    }else{
+                        goPath = obj.redirect;
+                    }
+
+                };
+                that.$router.push(goPath)
             }
         }
     }

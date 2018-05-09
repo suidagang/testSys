@@ -23,7 +23,7 @@ const tagsView = {
       }
     },
     DEL_VISITED_VIEWS: (state, view) => {
-      console.log(state.visitedViews);
+      //console.log(state.visitedViews);
       for (const [i, v] of state.visitedViews.entries()) {
         if (v.path === view.path) {
           state.visitedViews.splice(i, 1)

@@ -21,15 +21,17 @@ export const constantRouterMap = [
         path: '/login',
         component: Login,
         name: '登录页',
+        hidden: true,
         meta: { title: '登录页'}
     },
     {
         path: '',
         component: layout,
         redirect: '/homePage',
+        meta: { title: '首页',icons:"icon-icon_home"},
         children: [
             {
-                path: '/homePage',
+                path: 'homePage',
                 name: '首页',
                 component: Homepage,
                 meta: { title: '首页'}
@@ -49,7 +51,9 @@ export const asyncRouterMap = [
         redirect: 'noredirect',
         meta: {
             title: '组件',
+            icons:"icon-list"
         },
+
         children: [
             {
                 path: 'button',
@@ -81,6 +85,7 @@ export const asyncRouterMap = [
         path: '/switch',
         component: layout,
         redirect: '/switch/index',
+        meta: { title: '开关',icons:"icon-tool"},
         children: [
             {
                 path: 'index',
@@ -94,6 +99,7 @@ export const asyncRouterMap = [
         path: '/icon',
         component: layout,
         redirect: '/icon/index',
+        meta: { title: '图标',icons:"icon-search"},
         children: [
             {
                 path: 'index',
@@ -103,7 +109,7 @@ export const asyncRouterMap = [
             }
         ]
     },
-    { path: '*', redirect: '/login' }
+    { path: '*', redirect: '/login', hidden: true }
 ]
 export default new Router({
     scrollBehavior: () => ({ y: 0 }),

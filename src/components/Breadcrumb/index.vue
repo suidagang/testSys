@@ -71,7 +71,7 @@
              */
             getBreadcrumb() {
                 let matched = this.$route.matched.filter(item => item.name);
-                console.log(matched);
+//                console.log(matched);
                 const first = matched[0];
                 try{
                     if (first && first.name !== '首页') {
@@ -81,7 +81,7 @@
                     console.log(e)
                 };
                 this.levelList = matched;
-                console.log(this.levelList)
+                //console.log(this.levelList)
             }
         }
     }

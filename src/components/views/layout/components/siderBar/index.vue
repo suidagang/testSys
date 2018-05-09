@@ -3,7 +3,9 @@
         <el-menu class="side-bar-box"
                  mode="vertical"
                  :collapse="isCollapse"
-                 :default-active="indexPage"
+                 :collapse-transition="false"
+                 :show-timeout="200"
+                 :default-active="$route.path"
                  background-color="#304156"
                  text-color="#bfcbd9"
                  active-text-color="#409EFF">
@@ -18,8 +20,11 @@
     export default {
         data() {
             return {
-                indexPage:"homePage"
+
             }
+        },
+        mounted(){
+
         },
         components: { SidebarItem },
         computed: {
@@ -29,6 +34,12 @@
             isCollapse() {
                 return !this.sidebar.opened
             }
+        },
+        methods:{
+
+        },
+        watch:{
+
         }
     }
 </script>

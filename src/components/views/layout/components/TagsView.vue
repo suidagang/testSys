@@ -95,7 +95,7 @@ export default {
         },
         closeOthersTags() {
             console.log("关闭其他");
-            console.log(this.selectedTag.path)
+            //console.log(this.selectedTag.path)
             this.$router.push(this.selectedTag.path)
             this.$store.dispatch('delOthersViews', this.selectedTag).then(() => {
                 this.moveToCurrentTag();

@@ -66,7 +66,7 @@
             //获取显示器的高度
             that.containerHeight = $(window).height();
             $(".login-contail").height(that.containerHeight);
-            console.log(that.sidebar,that.language,that.twoName,that.threeName)
+            //console.log(that.sidebar,that.language,that.twoName,that.threeName)
         },
         computed: {
             ...mapGetters([
