@@ -18,6 +18,17 @@ import "./less/framework.less";
 //引入阿里巴巴iconfont
 import './iconfont/iconfont.css'
 import './iconfont/iconfont'
+//引入mock数据
+// 引入mockjs
+import './mock/mock.js'
+
+import axios from 'axios'
+import {post,fetch} from './axios/api'
+//定义全局变量
+Vue.prototype.$post=post;
+Vue.prototype.$fetch=fetch;
+
+
 Vue.use(ElementUI);
 NProgress.configure({ showSpinner: false })// NProgress Configuration
 //引入store vueX
