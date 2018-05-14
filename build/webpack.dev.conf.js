@@ -76,11 +76,18 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 //express 配置server
 var express = require("express")
 var apiServer = express()
+var appData = require('../src/mock/data.js')
+//HTTP请求体解析中间件
 var bodyParser = require('body-parser')
+// 创建 application/x-www-form-urlencoded 解析
 apiServer.use(bodyParser.urlencoded({ extended: true }))
+// 创建 application/json 解析
 apiServer.use(bodyParser.json())
 var apiRouter = express.Router()
 var fs = require('fs')
+apiRouter.get("/sex",function(req,res){
+  res.json(appData)
+})
 apiRouter.route('/:apiName') //接口路径
 .all(function (req, res) {
   fs.readFile('./src/mock/db.json', 'utf8', function (err, data) {  //读取接口文件
