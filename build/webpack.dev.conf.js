@@ -86,7 +86,10 @@ apiServer.use(bodyParser.json())
 var apiRouter = express.Router()
 var fs = require('fs')
 apiRouter.get("/sex",function(req,res){
-  res.json(appData)
+  res.json(appData.appData.list)
+})
+apiRouter.get("/info",function(req,res){
+  res.json(appData.infoData.list)
 })
 apiRouter.route('/:apiName') //接口路径
 .all(function (req, res) {

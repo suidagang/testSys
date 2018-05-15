@@ -29,15 +29,15 @@
             setNewsApi: function() {
                 var that = this;
                 console.log("请求");
-                this.$post('/msg').then(res => {
+                this.$fetch('/api/sex').then(res => {
                     console.log('调用封装后的axios成功');
-                    console.log(res.data)
+                    console.log(res)
 
                 });
-//                axios.post('/msg')
-//                .then(function(response){
-//                    console.log(response.data)
-//                })
+                this.$post('/api/goods')
+                .then(function(response){
+                    console.log(response.data)
+                })
             },
         }
     }

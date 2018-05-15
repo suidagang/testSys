@@ -18,6 +18,10 @@ import "./less/framework.less";
 //引入阿里巴巴iconfont
 import './iconfont/iconfont.css'
 import './iconfont/iconfont'
+// filter(自定义过滤器)
+import './filter/filter'
+// directive(自定义指令)
+import './directive/Commondirective'
 
 //封装axios  ajax请求
 import axios from 'axios'

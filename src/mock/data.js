@@ -7,4 +7,12 @@ var appData = Mock.mock({
         'id|+1': 1
     }]
 });
+var infoData = Mock.mock({
+    'list|5-10':[{
+        'age|20-30':30,
+        'name':'@cname',
+        'type':''
+    }]
+})
 module.exports.appData = appData;
+module.exports.infoData = infoData;
