@@ -22,6 +22,28 @@ import './iconfont/iconfont'
 import './filter/filter'
 // directive(自定义指令)
 import './directive/Commondirective'
+//引入图片懒加载
+import VueLazyload from 'vue-lazyload'
+//图片懒加载配置项
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: require('./assets/logo.png'),
+  loading: require('./assets/logo.png'),
+  try: 1 // default 1
+})
+//引入国际化翻译
+import VueI18n from 'vue-i18n';
+
+Vue.use(VueI18n);
+//获取浏览器使用的语言
+let language = (navigator.language || navigator.browserLanguage).substring(0, 2).toLowerCase();
+const i18n = new VueI18n({
+  locale: language, // 语言标识
+  messages: {
+    'zh': require('./i18n/zh'),
+    'en': require('./i18n/en')
+  }
+})
 
 //封装axios  ajax请求
 import axios from 'axios'
@@ -92,6 +114,7 @@ new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   components: { App },
   template: '<App/>'
 })

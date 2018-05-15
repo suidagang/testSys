@@ -16,6 +16,7 @@
                 </el-dropdown-menu>
             </el-dropdown>
             <el-button type="primary" @click="goOut()" style="float: left;margin-top: 10px;margin-left: 50px">退出</el-button>
+            <el-button type="primary" @click="changeLanguage()" style="float: left;margin-top: 10px;margin-left: 50px">中文/EN</el-button>
             <el-tooltip effect="dark" content="主题颜色" placement="bottom">
                 <theme-picker class="theme-switch right-menu-item"></theme-picker>
             </el-tooltip>
@@ -64,6 +65,15 @@
                 console.log("退出");
                 localStorage.removeItem("token");
                 that.$router.push("login")
+            },
+            changeLanguage(){
+                let that = this;
+                if(that.$i18n.locale == 'en'){
+                    that.$i18n.locale = 'zh';
+                }else{
+                    that.$i18n.locale = 'en';
+                }
+
             }
         }
     }
