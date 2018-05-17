@@ -1,6 +1,7 @@
 <template>
     <div class="home-page-container">
         <div class="home">首页</div>
+        <div>{{$t("message.title")}}</div>
     </div>
 </template>
 
@@ -16,7 +17,7 @@
             }
         },
         mounted(){
-            var that = this;
+            let that = this;
             this.setNewsApi();
         },
         computed: {

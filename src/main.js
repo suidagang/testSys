@@ -45,6 +45,16 @@ const i18n = new VueI18n({
   }
 })
 
+// 引入vue-amap
+import VueAMap  from 'vue-amap';
+Vue.use(VueAMap);
+// 初始化vue-amap
+VueAMap.initAMapApiLoader({
+  // 申请的高德key
+  key: 'eccf7dedb7fba5654c93556be3a52b8f',
+  // 插件集合
+  plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor']
+});
 //封装axios  ajax请求
 import axios from 'axios'
 import {post,fetch} from './axios/api'
