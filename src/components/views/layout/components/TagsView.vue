@@ -80,16 +80,17 @@ export default {
             })
         },
         closeSelectedTag(view) {
-            this.$store.dispatch('delVisitedViews', view).then((views) => {
-                if (this.isActive(view)) {
+            let that = this;
+            that.$store.dispatch('delVisitedViews', view).then((views) => {
+                if (that.isActive(view)) {
                     //slice(start),第一个参数是-1表示最后一个元素
                     const latestView = views.slice(-1)[0]
                     if (latestView) {
-                        this.$router.push(latestView.path)
+                        that.$router.push(latestView.path)
                     } else {
-                        this.$router.push('/')
+                        that.$router.push('/')
                     };
-                    this.closeMenu();
+                    that.closeMenu();
                 }
             })
         },
