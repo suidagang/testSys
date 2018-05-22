@@ -40,13 +40,6 @@ export default {
             this.addViewTags()
             this.moveToCurrentTag()
         },
-//        visible(value) {
-//            if (value) {
-//                document.body.addEventListener('click', this.closeMenu)
-//            } else {
-//                document.body.removeEventListener('click', this.closeMenu)
-//            }
-//        }
     },
     mounted() {
         this.addViewTags()
