@@ -1,7 +1,7 @@
 <template>
     <div class="home-page-container">
         <div class="home">首页</div>
-        <div>{{$t("message.title")}}</div>
+        <div class="i18n-box">{{$t("message.title")}}</div>
     </div>
 </template>
 
@@ -45,6 +45,17 @@
 </script>
 
 <style type="text/css" lang="less" scoped>
+    @nice-blue: #5B83AD;
+    @light-blue:@nice-blue + #111;
+    /*混合（Mixins）*/
+    .bordered {
+        border-top: dotted 1px black;
+        border-bottom: solid 2px black;
+    }
+    .i18n-box{
+        width:100px;
+        .bordered;
+    }
     .home-page-container{
         width:100%;
         overflow: hidden;
@@ -54,6 +65,7 @@
         height: 300px;
         border-radius: 150px;
         background: #dda0dd;
+        /*background:@light-blue;*/
         line-height: 300px;
         text-align: center;
         font-size: 30px;
