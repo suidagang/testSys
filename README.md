@@ -1,6 +1,6 @@
 # sys-demo
 
-> demo
+> [demo](http://panjiachen.github.io/vue-element-admin)
 
 ## Build Setup
 
