@@ -14,16 +14,23 @@
                 active-text="按月付费"
                 inactive-text="按年付费">
         </el-switch>
+        <sui-radio v-model="radio" :value="1">单选1</sui-radio>
+        <sui-radio v-model="radio" :value="2">单选2</sui-radio>
+        <sui-radio v-model="radio" :value="3">单选3</sui-radio>
+        <el-button type="primary" icon="el-icon-edit" @click="getRadio()"></el-button>
     </div>
 </template>
 
 <script>
+    import suiRadio from '../../radio/commonRadio.vue'
     export default {
         name: 'layout',
         data() {
             return {
                 value3: true,
-                value4: true
+                value4: true,
+                radio:1,
+                radioOne:2
             }
         },
         mounted(){
@@ -33,9 +40,13 @@
 
         },
         components: {
-
+            suiRadio
         },
         methods:{
+            getRadio(){
+                let that = this;
+                console.log(that.radio)
+            }
         }
     }
 </script>
