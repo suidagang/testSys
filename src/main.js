@@ -22,6 +22,8 @@ import './iconfont/iconfont'
 import './filter/filter'
 // directive(自定义指令)
 import './directive/Commondirective'
+//设置全局eventbus来传值
+window.eventBus = new Vue();
 //引入图片懒加载
 import VueLazyload from 'vue-lazyload'
 //图片懒加载配置项
@@ -61,6 +63,11 @@ import {post,fetch} from './axios/api'
 //定义全局变量
 Vue.prototype.$post=post;
 Vue.prototype.$fetch=fetch;
+
+import Simplert from 'vue2-simplert-plugin'
+require('vue2-simplert-plugin/dist/vue2-simplert-plugin.css')
+
+Vue.use(Simplert)
 
 
 Vue.use(ElementUI);

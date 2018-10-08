@@ -1,7 +1,8 @@
 <template>
     <div class="home-page-container">
-        <div class="home">首页</div>
+        <div class="home">{{title}}</div>
         <div class="i18n-box">{{$t("message.title")}}</div>
+        <button @click="testMod()">提示框</button>
     </div>
 </template>
 
@@ -13,11 +14,12 @@
         data() {
             return {
                 foods:null,
-
+                title:"测试"
             }
         },
         mounted(){
             let that = this;
+            that.title = "首页";
             this.setNewsApi();
         },
         computed: {
@@ -40,6 +42,17 @@
                     console.log(response.data)
                 })
             },
+            testMod(){
+                let Warning = {
+                    message: 'Do you really want to leave? you have unsaved changes!',
+                    useConfirmBtn: true,
+                    customCloseBtnText: 'Yes',
+                    customConfirmBtnText: 'No',
+                    onClose: this.Leave,
+                    onConfirm: this.StayWhereYouAre
+                };
+                this.$Simplert.open(Warning)
+            }
         }
     }
 </script>

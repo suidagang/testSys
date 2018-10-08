@@ -13,11 +13,17 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "element-ui": "^2.1.0",
+    "element-ui": "^2.4.6",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
+    "nprogress": "^0.2.0",
+    "sweet-modal-vue": "^2.0.0",
     "vue": "^2.5.2",
+    "vue-js-modal": "^1.3.18",
+    "vue-messagebox": "^1.0.3",
     "vue-router": "^3.0.1",
+    "vue2-simplert-plugin": "^0.4.1",
+    "vuejs-dialog": "^1.3.0",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
@@ -53,9 +59,13 @@
     "friendly-errors-webpack-plugin": "^1.6.1",
     "gsap": "^2.0.0",
     "html-webpack-plugin": "^2.30.1",
+    "jasmine-core": "^3.1.0",
     "jest": "^22.0.4",
     "jest-serializer-vue": "^0.3.0",
     "json-server": "^0.12.2",
+    "karma": "^2.0.3",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.2",
     "mockjs": "^1.0.1-beta3",
     "node-notifier": "^5.1.2",
     "node-sass": "^4.8.3",

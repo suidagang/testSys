@@ -59,7 +59,7 @@ export default {
 }
 </script>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
+<style rel="stylesheet/scss" lang="less" scoped>
 .scroll-container {
   white-space: nowrap;
   position: relative;
